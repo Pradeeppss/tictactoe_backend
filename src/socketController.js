@@ -21,12 +21,11 @@ io.on("connection", (socket) => {
     });
     socket.on("join_game", async (name) => {
         if (roomId.roomNo) {
-            console.log("here");
             roomId.playerTwo = socket.id;
             await socket.join(roomId.roomNo);
-            console.log(
-                `User with id ${socket.id} and name ${name} joined room with id ${roomId.roomNo}`
-            );
+            // console.log(
+            //     `User with id ${socket.id} and name ${name} joined room with id ${roomId.roomNo}`
+            // );
             let random = Math.random() * 10;
             if (random > 5) {
                 io.to(roomId.playerOne).emit("joined", {
@@ -52,13 +51,13 @@ io.on("connection", (socket) => {
             roomId.roomNo = v4();
             roomId.playerOne = socket.id;
             await socket.join(roomId.roomNo);
-            console.log(
-                `User with id ${socket.id} with name ${name} first joined room with id ${roomId.roomNo}`
-            );
+            // console.log(
+            //     `User with id ${socket.id} with name ${name} first joined room with id ${roomId.roomNo}`
+            // );
         }
     });
     socket.on("sendGamestate", async (data) => {
-        console.log(data);
+        // console.log(data);
         socket.to(data.room).emit("receiveGameState", data);
     });
 });
